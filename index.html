@@ -1,0 +1,389 @@
+<!DOCTYPE html><html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#090d18">
+<title>NEURAL FLOAT AI</title>
+<style>
+:root{
+  --bg:#090d18;
+  --panel:rgba(20,27,45,.88);
+  --gold:#e9c779;
+  --cyan:#55e7ed;
+  --text:#f3f5ff;
+  --muted:#939db5;
+  --border:rgba(233,199,121,.2);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  background:
+    radial-gradient(ellipse at 15% 10%,rgba(54,90,170,.2),transparent 45%),
+    radial-gradient(ellipse at 90% 85%,rgba(32,184,184,.1),transparent 40%),
+    var(--bg);
+  color:var(--text);
+  font-family:Arial,Tahoma,sans-serif;
+  overflow-x:hidden;
+}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+.app{
+  width:100%;
+  max-width:520px;
+  margin:auto;
+  padding:20px 16px 110px;
+}
+.top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:25px;
+}
+.brand{display:flex;align-items:center;gap:11px}
+.logo{
+  width:48px;height:48px;border-radius:16px;
+  display:grid;place-items:center;
+  color:var(--gold);font-size:25px;
+  border:1px solid var(--border);
+  background:linear-gradient(145deg,#202a42,#101522);
+  box-shadow:0 0 25px #e9c77912;
+}
+.brand h1{font-size:16px;margin:0 0 5px;letter-spacing:1px}
+.brand p{font-size:11px;color:var(--muted);margin:0}
+.status{
+  border:1px solid #43d9a52c;
+  background:#43d9a510;color:#72e5ba;
+  border-radius:30px;padding:8px 10px;font-size:11px;
+}
+.hero{
+  position:relative;overflow:hidden;
+  border:1px solid var(--border);
+  background:linear-gradient(145deg,#19233aee,#101522f5);
+  border-radius:25px;padding:23px 20px;margin-bottom:18px;
+}
+.hero:after{
+  content:"";position:absolute;width:160px;height:160px;
+  border:1px solid #e9c77920;border-radius:50%;
+  top:-85px;left:-65px;
+  box-shadow:0 0 0 18px #e9c77908,0 0 0 38px #e9c77905;
+}
+.eyebrow{font-size:11px;color:var(--gold);letter-spacing:2px}
+.hero h2{font-size:25px;line-height:1.6;margin:12px 0 8px}
+.hero h2 span{color:var(--gold)}
+.hero p{font-size:13px;line-height:1.9;color:#b4bfd3;margin:0}
+.core-wrap{display:flex;justify-content:center;padding:19px 0 23px}
+.core{
+  position:relative;width:132px;height:132px;border-radius:50%;
+  display:grid;place-items:center;
+  border:1px solid #e9c77975;
+  background:radial-gradient(circle,#263852 0%,#131c2d 58%,#0b1020 72%);
+  box-shadow:0 0 32px #55e7ed13,inset 0 0 28px #e9c77910;
+}
+.core:before,.core:after{
+  content:"";position:absolute;inset:-9px;border:1px solid #55e7ed38;
+  border-radius:50%;animation:orbit 12s linear infinite;
+}
+.core:after{inset:-17px;border-color:#e9c77925;animation-duration:20s;animation-direction:reverse}
+.core-icon{font-size:43px;color:var(--gold)}
+@keyframes orbit{to{transform:rotate(360deg)}}
+.section-title{
+  display:flex;align-items:center;justify-content:space-between;
+  margin:25px 2px 13px;
+}
+.section-title h3{font-size:15px;margin:0}
+.section-title span{font-size:11px;color:var(--muted)}
+.apps{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;
+}
+.app-card{
+  min-height:110px;padding:14px 5px 11px;
+  border-radius:17px;border:1px solid #ffffff12;
+  background:var(--panel);color:var(--text);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:10px;transition:.2s;
+}
+.app-card:active{transform:scale(.96)}
+.app-card.selected{border-color:var(--gold);background:#e9c77912}
+.app-icon{font-size:26px}
+.app-name{font-size:12px;text-align:center}
+.app-desc{font-size:10px;color:var(--muted);text-align:center}
+.workspace{
+  margin-top:19px;border:1px solid var(--border);
+  background:var(--panel);border-radius:21px;padding:17px;
+}
+.workspace-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px}
+.workspace-head strong{font-size:14px}
+.tag{font-size:10px;color:var(--cyan);border:1px solid #55e7ed35;padding:5px 8px;border-radius:20px}
+textarea{
+  width:100%;min-height:115px;resize:vertical;
+  border:1px solid #ffffff17;border-radius:14px;
+  background:#090e1a;color:var(--text);
+  padding:13px;outline:none;font-size:13px;line-height:1.9;
+}
+textarea:focus{border-color:#55e7ed88}
+textarea::placeholder{color:#65718a}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:11px}
+.btn{
+  border:1px solid #ffffff17;border-radius:12px;
+  padding:12px 8px;background:#202a3d;color:var(--text);font-size:12px;
+}
+.btn.primary{
+  background:linear-gradient(110deg,#e9c779,#b99a54);
+  color:#111522;border:0;font-weight:bold;
+}
+.btn:active{transform:scale(.98)}
+.notice{font-size:11px;line-height:1.8;color:var(--muted);margin:12px 2px 0}
+.quick{
+  display:flex;gap:8px;overflow-x:auto;padding:2px 0 8px;
+  scrollbar-width:none;
+}
+.quick::-webkit-scrollbar{display:none}
+.chip{
+  white-space:nowrap;border:1px solid #ffffff18;background:#131b2b;
+  color:#c8d1e2;border-radius:30px;padding:9px 12px;font-size:11px;
+}
+.output{
+  display:none;margin-top:12px;padding:13px;
+  border-radius:13px;background:#090e1a;border:1px solid #55e7ed35;
+  font-size:12px;line-height:1.9;white-space:pre-wrap;overflow-wrap:anywhere;
+}
+.bottom{
+  position:fixed;z-index:10;bottom:0;left:0;right:0;
+  padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+  background:linear-gradient(0deg,#090d18 75%,transparent);
+}
+.bottom-inner{
+  max-width:488px;margin:auto;display:flex;align-items:center;gap:12px;
+}
+.float-button{
+  width:59px;height:59px;flex:0 0 59px;border-radius:20px;
+  border:1px solid #f8dfa0;
+  background:linear-gradient(145deg,#f4d996,#b48c3d);
+  color:#111522;font-size:26px;
+  box-shadow:0 5px 25px #e9c77935;
+}
+.float-button:active{transform:scale(.94)}
+.bottom-label{
+  flex:1;border:1px solid #ffffff15;background:#171f30ee;
+  border-radius:17px;padding:12px 14px;
+  font-size:12px;color:#c4cde0;
+}
+.bottom-label strong{display:block;color:var(--gold);margin-bottom:4px}
+.toast{
+  position:fixed;z-index:20;top:15px;left:50%;
+  transform:translate(-50%,-15px);opacity:0;pointer-events:none;
+  background:#202b40;border:1px solid var(--border);border-radius:12px;
+  padding:12px 16px;font-size:12px;transition:.25s;
+  width:max-content;max-width:90%;
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(min-width:480px){
+  .app{padding-top:28px}
+  .hero h2{font-size:29px}
+}
+</style>
+</head>
+<body>
+<div class="toast" id="toast"></div><main class="app">
+  <header class="top">
+    <div class="brand">
+      <div class="logo">✳</div>
+      <div>
+        <h1>NEURAL FLOAT AI</h1>
+        <p>SMART FLOATING ASSISTANT</p>
+      </div>
+    </div>
+    <div class="status">● الواجهة جاهزة</div>
+  </header>  <section class="hero">
+    <div class="eyebrow">YOUR INTELLIGENT SPACE</div>
+    <h2>ذكاؤك الاصطناعي،<br><span>في متناول يدك.</span></h2>
+    <p>مساحة موحدة للوصول إلى أدواتك الذكية، والتعامل مع النصوص المنسوخة، وتنظيم مهامك بسرعة.</p>
+    <div class="core-wrap">
+      <div class="core"><div class="core-icon">✳</div></div>
+    </div>
+    <div class="eyebrow" style="text-align:center">INTELLIGENCE · SPEED · CONTROL</div>
+  </section>  <div class="section-title">
+    <h3>مساحة التطبيقات</h3>
+    <span>اختر أداة للبدء</span>
+  </div>  <section class="apps" id="apps">
+    <button class="app-card selected" data-name="مساعد الذكاء">
+      <span class="app-icon">✳</span><span class="app-name">مساعد الذكاء</span>
+      <span class="app-desc">تحليل وتفكير</span>
+    </button>
+    <button class="app-card" data-name="Gemini">
+      <span class="app-icon">✧</span><span class="app-name">Gemini</span>
+      <span class="app-desc">مساعد ذكي</span>
+    </button>
+    <button class="app-card" data-name="ChatGPT">
+      <span class="app-icon">◉</span><span class="app-name">ChatGPT</span>
+      <span class="app-desc">محادثة وأفكار</span>
+    </button>
+    <button class="app-card" data-name="تحليل النص">
+      <span class="app-icon">⌕</span><span class="app-name">تحليل النص</span>
+      <span class="app-desc">فهم واستخلاص</span>
+    </button>
+    <button class="app-card" data-name="التوصيات">
+      <span class="app-icon">◇</span><span class="app-name">التوصيات</span>
+      <span class="app-desc">حلول وبدائل</span>
+    </button>
+    <button class="app-card" data-name="الأدوات">
+      <span class="app-icon">⚙</span><span class="app-name">الأدوات</span>
+      <span class="app-desc">خيارات إضافية</span>
+    </button>
+  </section>  <div class="section-title">
+    <h3>مركز الأوامر الذكي</h3>
+    <span id="selectedName">مساعد الذكاء</span>
+  </div>  <div class="quick" id="quick">
+    <button class="chip" data-prompt="حلل النص التالي واستخرج فكرته الرئيسية والنقاط المهمة:">تحليل</button>
+    <button class="chip" data-prompt="اقترح حلولًا ذكية وبدائل عملية للمشكلة التالية:">حلول وبدائل</button>
+    <button class="chip" data-prompt="حسّن النص التالي واجعله واضحًا واحترافيًا:">تحسين</button>
+    <button class="chip" data-prompt="ضع خطة عملية خطوة بخطوة لتحقيق الهدف التالي:">خطة تنفيذية</button>
+    <button class="chip" data-prompt="ترجم النص التالي إلى العربية مع الحفاظ على المعنى:">ترجمة</button>
+  </div>  <section class="workspace">
+    <div class="workspace-head">
+      <strong>مساحة النصوص المنسوخة</strong>
+      <span class="tag">CLIPBOARD</span>
+    </div>
+    <textarea id="input" placeholder="الصق هنا النص المنسوخ من أي تطبيق، أو اكتب طلبك..."></textarea>
+    <div class="actions">
+      <button class="btn" id="paste">📋 قراءة الحافظة</button>
+      <button class="btn" id="clear">مسح النص</button>
+      <button class="btn primary" id="copy">نسخ النص</button>
+      <button class="btn" id="share">مشاركة النص</button>
+    </div>
+    <p class="notice">الخصوصية أولا: لا تقرأ هذه الصفحة حافظة الهاتف تلقائيا. قراءة الحافظة تحتاج إلى ضغطك على الزر وموافقة المتصفح عند الحاجة.</p>
+    <div class="output" id="output"></div>
+  </section>  <div class="section-title">
+    <h3>مسارات ذكية</h3>
+    <span>فكّر · طوّر · أنجز</span>
+  </div>
+  <div class="apps">
+    <button class="app-card" data-prompt="قدّم توصية عملية مبنية على تحليل واضح للنص التالي:">
+      <span class="app-icon">◎</span><span class="app-name">توصية</span>
+      <span class="app-desc">قرار مدروس</span>
+    </button>
+    <button class="app-card" data-prompt="ابتكر تصورا متقدما وحلولا غير تقليدية للمسألة التالية:">
+      <span class="app-icon">✧</span><span class="app-name">ابتكار</span>
+      <span class="app-desc">أفكار جديدة</span>
+    </button>
+    <button class="app-card" data-prompt="أنشئ منهجية وخطة تنفيذية مع مراحل واضحة لطلب التالي:">
+      <span class="app-icon">⌘</span><span class="app-name">استراتيجية</span>
+      <span class="app-desc">خطة منهجية</span>
+    </button>
+  </div>
+</main><footer class="bottom">
+  <div class="bottom-inner">
+    <button class="float-button" id="floatButton" aria-label="فتح المساعد">✳</button>
+    <button class="bottom-label" id="openAssistant">
+      <strong>NEURAL FLOAT</strong>
+      اضغط لفتح مركز الأوامر
+    </button>
+  </div>
+</footer><script>
+(function(){
+  const input=document.getElementById('input');
+  const output=document.getElementById('output');
+  const toast=document.getElementById('toast');
+  const selectedName=document.getElementById('selectedName');
+  let activeApp='مساعد الذكاء';
+  let toastTimer;
+
+  function notify(message){
+    toast.textContent=message;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer=setTimeout(()=>toast.classList.remove('show'),2600);
+  }
+
+  function showOutput(message){
+    output.style.display='block';
+    output.textContent=message;
+  }
+
+  document.querySelectorAll('.app-card[data-name]').forEach(card=>{
+    card.addEventListener('click',()=>{
+      document.querySelectorAll('.app-card[data-name]').forEach(c=>c.classList.remove('selected'));
+      card.classList.add('selected');
+      activeApp=card.dataset.name;
+      selectedName.textContent=activeApp;
+      notify('تم اختيار: '+activeApp);
+    });
+  });
+
+  document.querySelectorAll('.chip').forEach(chip=>{
+    chip.addEventListener('click',()=>{
+      const prefix=chip.dataset.prompt;
+      input.value=prefix+'\n\n'+input.value;
+      input.focus();
+      notify('تمت إضافة قالب الأمر');
+    });
+  });
+
+  document.querySelectorAll('.app-card[data-prompt]').forEach(card=>{
+    card.addEventListener('click',()=>{
+      input.value=card.dataset.prompt+'\n\n'+input.value;
+      input.focus();
+      document.querySelector('.workspace').scrollIntoView({behavior:'smooth',block:'center'});
+      notify('تم تجهيز القالب');
+    });
+  });
+
+  document.getElementById('clear').addEventListener('click',()=>{
+    input.value='';
+    output.style.display='none';
+    notify('تم مسح النص');
+  });
+
+  document.getElementById('copy').addEventListener('click',async()=>{
+    if(!input.value.trim()){notify('لا يوجد نص لنسخه');return}
+    try{
+      await navigator.clipboard.writeText(input.value);
+      notify('تم نسخ النص');
+    }catch(e){
+      input.focus();input.select();
+      try{
+        const ok=document.execCommand('copy');
+        notify(ok?'تم نسخ النص':'حدد النص وانسخه يدويا');
+      }catch(err){notify('حدد النص ثم اختر نسخ')}
+    }
+  });
+
+  document.getElementById('paste').addEventListener('click',async()=>{
+    try{
+      if(!navigator.clipboard||!navigator.clipboard.readText()){
+        throw new Error('clipboard unavailable');
+      }
+      input.value=await navigator.clipboard.readText();
+      notify(input.value?'تمت قراءة النص':'الحافظة فارغة');
+    }catch(e){
+      showOutput('إذا لم يسمح المتصفح بقراءة الحافظة، اضغط مطولا داخل مربع النص واختر «لصق». هذه الصفحة لا تستطيع تجاوز قيود أمان الهاتف.');
+      notify('استخدم اللصق اليدوي عند الحاجة');
+    }
+  });
+
+  document.getElementById('share').addEventListener('click',async()=>{
+    if(!input.value.trim()){notify('اكتب النص أولا');return}
+    try{
+      if(navigator.share){
+        await navigator.share({title:'NEURAL FLOAT AI',text:input.value});
+      }else{
+        await navigator.clipboard.writeText(input.value);
+        notify('تم نسخ النص للمشاركة');
+      }
+    }catch(e){
+      if(e.name!=='AbortError')notify('يمكنك نسخ النص ومشاركته يدويا');
+    }
+  });
+
+  function openAssistant(){
+    document.querySelector('.workspace').scrollIntoView({behavior:'smooth',block:'center'});
+    setTimeout(()=>input.focus({preventScroll:true}),350);
+    notify('مركز الأوامر جاهز');
+  }
+  document.getElementById('floatButton').addEventListener('click',openAssistant);
+  document.getElementById('openAssistant').addEventListener('click',openAssistant);
+})();
+</script></body>
+  </html>
